@@ -5,12 +5,12 @@ import './App.css';
 
 
 const cardImages = [
-  { "src": "/img/helmet-1.png"},
-  { "src": "/img/potion-1.png"},
-  { "src": "/img/ring-1.png"},
-  { "src": "/img/scroll-1.png"},
-  { "src": "/img/shield-1.png"},
-  { "src": "/img/sword-1.png"},
+  { "src": "/img/helmet-1.png", matched: false},
+  { "src": "/img/potion-1.png", matched: false},
+  { "src": "/img/ring-1.png", matched: false},
+  { "src": "/img/scroll-1.png", matched: false},
+  { "src": "/img/shield-1.png", matched: false},
+  { "src": "/img/sword-1.png", matched: false},
 ]
 
 function App() {
@@ -43,6 +43,13 @@ function App() {
     if(!choiceOne || !choiceTwo) return
 
     if(choiceOne.src === choiceTwo.src && choiceOne.id !== choiceTwo.id ){
+      setCards(prevCards => {
+        return prevCards.map(card => {
+          return card.src === choiceTwo.src
+            ? {...card, matched: true}
+            : card
+        })
+      })
       console.log('those card match')
       resetTurn()
     }else {
@@ -52,6 +59,7 @@ function App() {
     }
   }, [choiceOne, choiceTwo])
 
+    console.log(cards)
 
 
   return (
